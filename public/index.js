@@ -1,5 +1,5 @@
 var app = function(){
-  const url ="http://api.giphy.com/v1/gifs/translate";
+  const url ="https://api.giphy.com/v1/gifs/trending?api_key=04tUsMoILpGuMAAiX2Zu6kyzfry2GJAE&limit=40";
   makeRequest(url, requestComplete);
 };
 
@@ -21,9 +21,28 @@ const requestComplete = function() {
   select.addEventListener('change', handleSelectChange);
 };
 
-const handleSelectChange = function() {
-  const beers = JSON.parse(this.value)
+const populateList = function(gifs) {
   const ul = document.querySelector('#gifs');
+  gifs.forEach(function(gifs){
+    const li = document.createElement("li");
+    li.textContent = gif.name;
+    ul.appendChild(li);
+  });
+}
+
+const populationDropDown = function(beers){
+  const dropdown = document.querySelector('#gifs');
+  gifs.forEach(function(gif){
+    const option = document.createElement('option');
+    option.value = JSON.stringify(gifs);
+    option.textContent = gifs.name;
+    dropdown.appendChild(option);
+  });
+
+const handleSelectChange = function() {
+  const gifs = JSON.parse(this.value)
+  const ul = document.querySelector('#gifs');
+}
 }
 
 window.addEventListener('load', app);
