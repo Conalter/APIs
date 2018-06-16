@@ -10,3 +10,20 @@ const makeRequest = function(url, callback) {
   request.addEventListener("load", callback);
   request.send();
 };
+
+const requestComplete = function() {
+  if (this.status !== 200) return;
+  const gifs = JSON.parse(this.response);
+  populateList(gifs);
+  populationDropDown(gifs);
+  const select = document.querySelector('select');
+  console.log(select);
+  select.addEventListener('change', handleSelectChange);
+};
+
+const handleSelectChange = function() {
+  const beers = JSON.parse(this.value)
+  const ul = document.querySelector('#gifs');
+}
+
+window.addEventListener('load', app);
