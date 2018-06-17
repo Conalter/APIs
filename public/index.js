@@ -1,5 +1,5 @@
 var app = function(){
-  const url ="https://api.giphy.com/v1/gifs/trending?api_key=04tUsMoILpGuMAAiX2Zu6kyzfry2GJAE&limit=40";
+  const url ="https://api.giphy.com/v1/gifs/trending?api_key=04tUsMoILpGuMAAiX2Zu6kyzfry2GJAE&limit=20";
   makeRequest(url, requestComplete);
 };
 
@@ -13,35 +13,35 @@ const makeRequest = function(url, callback) {
 
 const requestComplete = function() {
   if (this.status !== 200) return;
-  const gifs = JSON.parse(this.response);
-  populateList(gifs);
-  populationDropDown(gifs);
+  const gif = JSON.parse(this.response);
+  populateList(gif);
+  populationDropDown(gif);
   const select = document.querySelector('select');
-  console.log(select);
   select.addEventListener('change', handleSelectChange);
 };
 
-const populateList = function(gifs) {
-  const ul = document.querySelector('#gifs');
-  gifs.forEach(function(gifs){
+const populateList = function(gif) {
+  const ul = document.querySelector('#gif');
+  console.log(gif);
+  gifs(function(gif){
     const li = document.createElement("li");
     li.textContent = gif.name;
     ul.appendChild(li);
   });
 }
 
-const populationDropDown = function(beers){
-  const dropdown = document.querySelector('#gifs');
-  gifs.forEach(function(gif){
+const populationDropDown = function(gif){
+  const dropdown = document.querySelector('#gif');
+  gif.forEach(function(gif){
     const option = document.createElement('option');
-    option.value = JSON.stringify(gifs);
-    option.textContent = gifs.name;
+    option.value = JSON.stringify(gif);
+    option.textContent = gif.name;
     dropdown.appendChild(option);
   });
 
 const handleSelectChange = function() {
-  const gifs = JSON.parse(this.value)
-  const ul = document.querySelector('#gifs');
+  const gif = JSON.parse(this.value)
+  const ul = document.querySelector('#gif');
 }
 }
 
